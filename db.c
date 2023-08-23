@@ -385,7 +385,7 @@ int Help()
 {
 
     printf("\n\nTo use this program you have to write :\n-------------------\n|./db (function)|\n-------------------\n\n");
-    printf("functions is :\n1.Add\n2.Edit\n3.Users\n4.All\n5.Search\n6.Export\n7.DBs\n8.Help\n\n");
+    printf("functions is :\n1.Add    : to add a user to the database.\n2.Edit   : to edit user in the database.\n3.Users  : to print one user data from database.\n4.All    : to display all users in the database. \n5.Search : to search in the database.\n6.Export : to export users from the database as csv file to open it in other apps.\n7.DBs    : to display one of csv files you was exported.\n8.Help   : to print how can you use this app.\n\n");
     return 0;
 
 }
