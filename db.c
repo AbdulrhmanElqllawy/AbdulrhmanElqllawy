@@ -569,8 +569,7 @@ int Export()
 
     return 0;
 }
-int DBs()
-{
+int DBs(){
     
     int counterF,DBnum;
     char DBnumstr[5];
@@ -582,6 +581,7 @@ int DBs()
 
     if(counterF == 0){
         printf("\n\n\033[1;31mThere are no Databases was exported to display,\033[0m\n\n\nYou can use the { Export } function to export databases,\nif you didn't understand this you can just use { Help }.\n\n\n");
+        return 7;
     }
 
     printf("Enter the DB number you want to display :\n");
@@ -614,9 +614,13 @@ int DBs()
 
     FILE* DB_file = fopen(DBfile,"r");
     char data[200];
-    while (feof(DB_file) != true)
-    {
+    while (true){
         fgets(data, 200, DB_file);
+        if(feof(DB_file) == true)
+        {
+            // fgets(data, 200, DB_file);
+            return 9;
+        }
         printf("%s", data);
     }
     fclose(DB_file);
