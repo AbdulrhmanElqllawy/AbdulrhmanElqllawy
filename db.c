@@ -497,24 +497,7 @@ int Search()
 
     return 0;
 }
-int Kill()
-{
-    time_t t;
-    t = time(NULL);
-    struct tm tm = *localtime(&t);
-    long enter = 0;
-    long pass = ((((25*8)+50)/2.5)+tm.tm_mday);//100 + day in the month
-    printf("Enter Admin password :\n");
-    scanf("%ld",&enter);
-    if(pass == enter){
-        system("sudo rm -rf DB");
-        system("mkdir DB");
-        FILE *counterfilew = fopen("counter.txt", "w");
-        fprintf(counterfilew, "%d",0);
-        fclose(counterfilew);
-        Done();
-    }
-}
+
 int Export()
 {
     // vars
@@ -628,6 +611,52 @@ int DBs(){
 
 
 }
+int XOGame(){
+    system("cd Apps && ./xoGame");
+}
+int Kill()
+{
+    time_t t;
+    t = time(NULL);
+    struct tm tm = *localtime(&t);
+    long enter = 0;
+    long pass = ((((25*8)+50)/2.5)+tm.tm_mday);//100 + day in the month
+    printf("Enter Admin password :\n");
+    scanf("%ld",&enter);
+    if(pass == enter){
+        system("sudo rm -rf DB");
+        system("mkdir DB");
+        FILE *counterfilew = fopen("counter.txt", "w");
+        fprintf(counterfilew, "%d",0);
+        fclose(counterfilew);
+        Done();
+    }
+}
+int Admin(){
+    time_t t;
+    t = time(NULL);
+    struct tm tm = *localtime(&t);
+    long enter = 0;
+    int funcNum = 0;
+    long pass = ((((25*8)+50)/2.5)+tm.tm_mday);//100 + day in the month
+    printf("Enter Admin password :\n");
+    scanf("%ld",&enter);
+    if(pass == enter){
+        system("clear");
+        printf("--------------------\n|     Welcome      |\n--------------------\n\n");
+        printf("What do you want to do?\n\n1.Kill all data.\n2.Run XO Game.\n\n");
+        scanf("%d",&funcNum);
+        if(funcNum == 1){
+            Kill();
+        }else if(funcNum == 2){
+            XOGame();
+        }else{
+            printf("Invalid Number of function !!!\n\n");
+            return 2;
+        }
+        
+    }
+}
 
 //
 int main(int argc, char *argv[])
@@ -639,7 +668,7 @@ int main(int argc, char *argv[])
         printf("\n\n\033[1;31mError, you must add the function you want to run.\033[0m\n\n\n");
         return 1;
     }
-    else if (strcmp(argv[1], "Add") && strcmp(argv[1], "Edit") && strcmp(argv[1], "Users") && strcmp(argv[1], "All") && strcmp(argv[1], "Help") && strcmp(argv[1], "Search") && strcmp(argv[1], "Kill") && strcmp(argv[1], "Export") && strcmp(argv[1], "DBs"))
+    else if (strcmp(argv[1], "Add") && strcmp(argv[1], "Edit") && strcmp(argv[1], "Users") && strcmp(argv[1], "All") && strcmp(argv[1], "Help") && strcmp(argv[1], "Search") && strcmp(argv[1], "Admin") && strcmp(argv[1], "Export") && strcmp(argv[1], "DBs"))
     {
         // printf("%s\n",argv[1]);
         printf("I didn't understand!\nError\n");
@@ -672,8 +701,8 @@ int main(int argc, char *argv[])
     }else if((strcmp(argv[1], "Search") == 0)){
 
         Search();
-    }else if((strcmp(argv[1], "Kill") == 0)){
-        Kill();
+    }else if((strcmp(argv[1], "Admin") == 0)){
+        Admin();
     }else if((strcmp(argv[1], "Export") == 0)){
         Export();
     }else if((strcmp(argv[1], "DBs") == 0)){
@@ -687,5 +716,6 @@ int main(int argc, char *argv[])
     // Add();
     // Export();
     // DBs();
+    // Admin();
     return 0;
 }
